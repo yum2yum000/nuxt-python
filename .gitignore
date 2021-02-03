@@ -26,3 +26,6 @@ backend/venv/
 
 #تصاویر پروفایل
 backend/media/
+
+
+frontend/node_modules/
