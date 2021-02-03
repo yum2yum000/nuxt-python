@@ -28,4 +28,4 @@ backend/venv/
 backend/media/
 
 
-frontend/node_modules/vue2-leaflet
+frontend/node_modules/vue2-leaflet/

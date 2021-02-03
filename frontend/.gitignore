@@ -2,7 +2,8 @@
 node_modules
 /dist
 
-
+node_modules/vue2-leaflet/
+node_modules/
 # local env files
 .env.local
 .env.*.local
