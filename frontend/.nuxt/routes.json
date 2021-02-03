@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Login___fa",
+    "path": "/Login",
+    "component": "F:\\\\blog\\\\frontend\\\\pages\\\\Login\\\\index.vue",
+    "chunkName": "pages/Login/index",
+    "_name": "_12a89f27"
+  },
+  {
+    "name": "Register___fa",
+    "path": "/Register",
+    "component": "F:\\\\blog\\\\frontend\\\\pages\\\\Register\\\\index.vue",
+    "chunkName": "pages/Register/index",
+    "_name": "_42714361"
+  },
+  {
+    "name": "index___fa",
+    "path": "/",
+    "component": "F:\\\\blog\\\\frontend\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_21b47204"
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "Error": {
+    "description": "Auto imported from F:/blog/frontend/components/Common/Error.vue"
+  },
+  "LazyError": {
+    "description": "Auto imported from F:/blog/frontend/components/Common/Error.vue"
+  },
+  "Loading": {
+    "description": "Auto imported from F:/blog/frontend/components/Common/Loading.vue"
+  },
+  "LazyLoading": {
+    "description": "Auto imported from F:/blog/frontend/components/Common/Loading.vue"
+  },
+  "UserLocation": {
+    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
+  },
+  "LazyUserLocation": {
+    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
+  },
+  "NavBar": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/NavBar.vue"
+  },
+  "LazyNavBar": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/NavBar.vue"
+  },
+  "SideBar": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/SideBar.vue"
+  },
+  "LazySideBar": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/SideBar.vue"
+  },
+  "SideToggle": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/SideToggle.vue"
+  },
+  "LazySideToggle": {
+    "description": "Auto imported from F:/blog/frontend/components/Navigation/SideToggle.vue"
+  },
+  "Observer": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Observer.vue"
+  },
+  "LazyObserver": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Observer.vue"
+  },
+  "AppForm": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
+  },
+  "LazyAppForm": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
+  },
+  "InputFile": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/InputFile.vue"
+  },
+  "LazyInputFile": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/InputFile.vue"
+  },
+  "InputText": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/InputText.vue"
+  },
+  "LazyInputText": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/InputText.vue"
+  },
+  "LanguageInput": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/LanguageInput.vue"
+  },
+  "LazyLanguageInput": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/LanguageInput.vue"
+  },
+  "InputPhone": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/Masks/InputPhone.vue"
+  },
+  "LazyInputPhone": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/Masks/InputPhone.vue"
+  }
+}
