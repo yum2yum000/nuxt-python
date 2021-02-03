@@ -1,0 +1,36 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+   body {
+       direction: rtl;
+       -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+       box-sizing: border-box;
+       font-family: yj,nyj;
+       font-size: 14px;
+       font-weight: normal;
+       outline: none!important;
+      
+   }
+   @font-face
+{
+ font-family:'YJ';
+src: url('../yekan-font/Yekan.eot?#') format('eot'),  /* IE6–8 */
+    url('../yekan-font/Yekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../yekan-font/Yekan.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+/*WebYekanNumberFont*/
+@font-face
+{
+ font-family:'NYJ';
+src: url('../yekan-font/yekannumbers-regular.eot?#') format('eot'),  /* IE6–8 */
+    url('../yekan-font/yekannumbers-regular.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../yekan-font/yekannumbers-regular.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+}
+
+.d-ltr{
+    direction: ltr!important;
+}
