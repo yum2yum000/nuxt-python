@@ -1,4 +1,4 @@
-export const vueI18n = {"locale":"fa","fallbackLocale":"fa","messages":{"fa":{"validation":{"max":"کاراکتر {_field_} باید حداقل {length} باشد","min":"کاراکتر {_field_} باید حداقل {length} باشد","length":"کاراکتر {_field_} باید {length} باشد","required":"{_field_} الزامی است ","includeLetter":" {_field_} باید شامل حروف باشد "},"placeholder":{"default":"را وارد نمایید {0}","selected":"را وارد نمایید {0}"},"logout":"خروج","username":"نام کاربری","email":"ایمیل","password":"رمز عبور","phone":"موبایل"}}}
+export const vueI18n = {"locale":"fa","fallbackLocale":"fa","messages":{"fa":{"validation":{"max":"کاراکتر {_field_} باید حداقل {length} باشد","min":"کاراکتر {_field_} باید حداقل {length} باشد","length":"کاراکتر {_field_} باید {length} باشد","required":"{_field_} الزامی است ","email":"{_field_} باید معتبر باشد ","includeLetter":" {_field_} باید شامل حروف باشد "},"placeholder":{"default":"را وارد نمایید {0}","selected":"را وارد نمایید {0}"},"logout":"خروج","username":"نام کاربری","email":"ایمیل","password":"رمز عبور","phone":"موبایل"}}}
 export const vueI18nLoader = false
 export const locales = [{"code":"fa","name":"persian"}]
 export const defaultLocale = 'fa'

@@ -1,11 +1,15 @@
 <template>
- <div>
-   <div class="flex p-3 border-light-gray-100 border-opacity-25 md:w-2/3 sm:w-full relative top-60 z-500">
+
+
+ <div >
+   <div v-if="$fetchState.pending"><img class="w-full"  src="@/assets/images/image-loader.gif" /></div>
+  
+   <div v-else class="flex p-3 border-light-gray-100 border-opacity-25 md:w-2/3 sm:w-full relative top-60 z-500">
      
             <multiselect  placeholder="جستجوی آدرس"
                                              v-model="adress"
                                              :options="options"
-                                             :selectLabel=" meh"
+                                             :selectLabel=" label"
                                              :hide-selected="true"
                                              selectedLabel="انتخاب شده"
                                              deselectLabel="حذف"
@@ -23,7 +27,7 @@
 
                                 </multiselect>
      </div>
-<l-map v-if="gettingLocation"
+<l-map 
       :zoom="zoom"
       :options="mapOptions"
       :center="center"    
@@ -56,7 +60,7 @@
   
      
     </l-map>
-    <div v-else><img class="w-full"  src="@/assets/images/image-loader.gif" /></div>
+    
  </div>
 
  
@@ -64,13 +68,15 @@
 
 <script>
 import { latLngBounds,latLng } from 'leaflet';
+fetchOnServer:false
 
-
-
-
-
-
-const tileProviders = [
+export default {
+  name: 'Example',
+  components: {
+   
+  },
+  fetch(){
+this.tileProviders=[
   {
     name: 'OpenStreetMap',
     visible: true,
@@ -79,11 +85,6 @@ const tileProviders = [
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   }
 ];
-
-export default {
-  name: 'Example',
-  components: {
-   
   },
   
   data() {
@@ -102,7 +103,7 @@ export default {
       
         zoomSnap:true,
       },
-      zoom: 18,
+      zoom: 12,
       minZoom: 1,
       maxZoom: 20,
       zoomPosition: 'topleft',
@@ -111,7 +112,7 @@ export default {
       attributionPrefix: 'Vue2Leaflet',
       imperial: false,
       Positions: ['topleft', 'topright', 'bottomleft', 'bottomright'],
-      tileProviders: tileProviders,
+      tileProviders: this.tileProviders,
        position: { lat: 35.635869336294625, lng:51.3500976562500 },
        currentAdress:'',
        gettingLocation:false,
@@ -119,7 +120,7 @@ export default {
        options: [
                 ],
        searchData:true,
-      meh:'',
+      label:'',
       adress: null,
       cordinate:''
       
@@ -127,24 +128,7 @@ export default {
     };
   },
     mounted() {
-   if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-          console.log(position)
-            this.center = latLng(position.coords.latitude, position.coords.longitude);
-            console.log('d',position.coords.latitude)
-            console.log(position.coords.longitude)
-           this.position={ lat: position.coords.latitude, lng: position.coords.longitude },
-         this.gettingLocation=true
-          },
-          error => {
-            this.gettingLocation=true
-             console.log(error.message);
-          }
-        );
-} else {
-        console.log("Your browser does not support geolocation API ");
-}
+  this.position={ lat: 35.635869336294625, lng:51.3500976562500 }
       },
   watch:{
            adress:function(value){
@@ -171,6 +155,7 @@ export default {
    })
    .then(res=>{
       this.currentAdress=res
+      console.log('123',this.currentAdress)
      this.$emit('adress', this.currentAdress)
    }).catch(e=>console.log(e.response))
 
@@ -182,6 +167,9 @@ export default {
      'x-api-key':'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjkyMjY1ZTQzNjQzNTNmNzgwYWU4Y2RjNTI3M2YwOWVkMTZkNWE1ODA4MjdmYjY3MzMwNjBjMWNkZDg2NzQyMmRmZGQ5YTdiMmYzM2Y1N2YzIn0.eyJhdWQiOiIxMjU3NyIsImp0aSI6IjkyMjY1ZTQzNjQzNTNmNzgwYWU4Y2RjNTI3M2YwOWVkMTZkNWE1ODA4MjdmYjY3MzMwNjBjMWNkZDg2NzQyMmRmZGQ5YTdiMmYzM2Y1N2YzIiwiaWF0IjoxNjEyMDg1Mjg3LCJuYmYiOjE2MTIwODUyODcsImV4cCI6MTYxNDg1MDA4Nywic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.MeAQn-E4P8Oh6o47dym7TiGdQ--gVB-a5vp8gUahRnMr_Mn7qV4NS7JdU2P-fqhCDXCXK5hCZP9x5_9rH5AlpiAjwRy8QYV_nbTK4Mso8QadumY3owX1UhxL5YvDhM9W0wj92pdNSP_cGGZmzw56Qom_UWX3x6WEG-9EE_DyLQk3fGVqCH-x679PvUXthMtTxUvz0-kalBsIrOocrzin3E43gVjG44Hiro1gdHojQNCcpd_EypF5Rn2V7OyeHxnfahxQvoAqLNlGUIfY5aOHj_QIl3mp4tY3sSk87PJ_r6Y6BII5MJgUk3DhIezOpi1uPkV_a4Dm3YeVWNH5IuPl_A'}
    }).then(res=>{
      this.options=res.data.value
+     this.zoom=18
+     this.currentAdress=this.options
+     
    }).catch((e)=>{
      console.log(e.response)
    })}
@@ -189,8 +177,9 @@ export default {
      onSelect(option, id) {
       console.log(option, id);
     },
-    getCordinate(){
-      console.log('999999')
+    getCordinate(selectedAdress){
+     console.log('44',selectedAdress)
+     this.$emit('adress', selectedAdress)
     }
    
   },

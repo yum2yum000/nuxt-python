@@ -93,7 +93,7 @@ export default {
      
     },
     methods:{
-        async submit(){
+        submit(){
           this.formData.append('update', 'data')
                 this.formData.append('last_name',this.user.last_name)
                 this.formData.append('username',this.user.username)
@@ -103,12 +103,20 @@ export default {
                 this.formData.append('bio',this.user.bio)
                 this.formData.append('adres',this.user.adres)
                 console.log(this.formData)
-           const m=await this.$api._post('/users/',this.formData,{cc:{ref:this.$refs.form}})
-           console.log(m)
+                this.$api._post('/users/',this.formData,{cc:{ref:this.$refs.form,fullResponse:'d'}}).then((res)=>{
+                if(res!==undefined){
+                  this.user=[]
+                   this.$refs.form.reset()
+                   this.$router.push({path:'/'})
+                  
+                }
+                })
+           
         },
-       getAdress(adress){
-         console.log(adress)
-        this.user.bio=adress.formatted_address
+       getAdress(address){
+
+        this.user.bio= address.address?address.address:address.formatted_address
+        
         },
         fileChanged(file){
          this.formData.append('avatar', '')

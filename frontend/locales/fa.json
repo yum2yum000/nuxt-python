@@ -5,6 +5,7 @@
       "min": "کاراکتر {_field_} باید حداقل {length} باشد",
       "length": "کاراکتر {_field_} باید {length} باشد",
       "required": "{_field_} الزامی است ",
+      "email": "{_field_} باید معتبر باشد ",
       "includeLetter": " {_field_} باید شامل حروف باشد "
     },
     "placeholder": {

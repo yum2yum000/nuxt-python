@@ -7,12 +7,12 @@
 
               <template v-for="(menu) in  menus" >
                 <div :key="menu.id" class="flex relative ">
-                 <nuxt-link v-if="menu.subMenu.length==0" :to="menu.menuTitle"   class="px-4 pt-menu py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">{{menu.menuTitle}}
+                 <nuxt-link v-if="menu.subMenu.length==0" :to="menu.route"   class="px-4 pt-menu py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">{{menu.menuTitle}}
                </nuxt-link>
               
               <div v-else  class="relative flex h-14" :key="menu.id" @mouseenter="[setActive(menu),open=true]" @mouseleave="open=false">
                 <button   class="flex flex-row items-center w-full px-4 py-2 mt-2 p-5 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                         <nuxt-link :to="localePath(menu.menuTitle)">{{menu.menuTitle}}</nuxt-link>
+                      <nuxt-link :to="localePath(menu.route)">{{menu.menuTitle}}</nuxt-link>
                          <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': dropShow==menu.menuTitle && open, 'rotate-0': !dropShow==menu.menuTitle && open}" class="inline w-4 h-4 ml-1 transition-transform duration-200 transform "><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>     
                     </button>
                         <div  :class="[(dropShow==menu.menuTitle && open)?'block':'hidden',menuHasImg==-1?'w-9':'w-600 flex flex-wrap']"  class=" w-400 p-2 mt-36 bg-white  absolute right-0 w-full  origin-top-right rounded-md shadow-lg md:w-48 z-30">
