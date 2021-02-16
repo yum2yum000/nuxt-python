@@ -75,16 +75,9 @@ export default {
   components: {
    
   },
-  fetch(){
-this.tileProviders=[
-  {
-    name: 'OpenStreetMap',
-    visible: true,
-    attribution:
-      '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  }
-];
+  async fetch(){
+   await this.fetchProvider()
+   this.$emit('hideSkelton',false)
   },
   
   data() {
@@ -141,6 +134,18 @@ this.tileProviders=[
             },
         },
   methods: {
+    fetchProvider(){
+     this.tileProviders=[
+  {
+    name: 'OpenStreetMap',
+    visible: true,
+    attribution:
+      '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  }
+];
+
+    },
     getLocation(){
     let search=this.search
     console.log(this.search)

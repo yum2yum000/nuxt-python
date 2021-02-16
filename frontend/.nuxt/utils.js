@@ -165,11 +165,11 @@ export async function setContext (app, context) {
       isDev: true,
       isHMR: false,
       app,
-
+      store: app.store,
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {}
+      env: {"authRoutes":["/crud",{"regex":["\\/profile"]}]}
     }
     // Only set once
     if (!process.static && context.req) {

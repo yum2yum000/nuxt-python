@@ -26,7 +26,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-   '~/plugins/veeValidate','~/plugins/i18n','~/plugins/axios'
+   '~/plugins/veeValidate','~/plugins/i18n','~/plugins/axios','~/plugins/skeleton','~/plugins/checkRoutes'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -41,7 +41,7 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'nuxt-i18n','@nuxtjs/axios',['nuxt-leaflet', {ssr: false}], 'nuxt-vue-multiselect',
+    'nuxt-i18n','@nuxtjs/axios',['nuxt-leaflet', {ssr: false}], 'nuxt-vue-multiselect','cookie-universal-nuxt',
     ['nuxt-fontawesome', {
       component: 'fa', 
       imports: [
@@ -85,6 +85,7 @@ export default {
     }
   },
   router:{
+    middleware:['load-auth'],
     parsQuery(query){
       return require('qs').parse(query)
     },
@@ -92,5 +93,11 @@ export default {
       const result=require('qs').stringify(query)
       return result? '?'+result :''
     }
+  },
+  env:{
+    authRoutes:[
+      '/crud',
+      {regex:[/\/profile/.source]},
+    ]
   }
 }

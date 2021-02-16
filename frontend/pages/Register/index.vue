@@ -14,13 +14,20 @@
                         <input-phone label="تلفن" v-model="user.phone" name="phone" :align="'text-left d-ltr'"  class="block w-50 p-3 rounded border border-transparent "></input-phone>
                         <div class="w-full pr-3">
                           <input-text label="آدرس" controlType="textarea" v-model="user.bio"  name="bio" class="pr-5 hover:outline-none focus:outline-none p-1"></input-text>
+                         <template v-if="loadSkelton" >
+                           <div class="mt-9"></div>
+                       <vue-skeleton-loader  :height="200" > </vue-skeleton-loader>
+                         </template>
+                        
+   
                          <client-only >
-                         <location @adress="getAdress"></location> 
+                         <location @hideSkelton="hideSkelton" @adress="getAdress"></location> 
                           </client-only>
                            </div>
                       <input-file :imgLoading="imgLoading" :imageUrl="imageUrl" @fileChanged="fileChanged" class="mt-5" @removeImg="removeImg">
                       <img class="w-48" slot="preloader" src="@/assets/images/image-loader.gif" />
                       </input-file>
+                      {{errorMessage}}
                           
 
                         <div  class="w-full p-3 text-center">
@@ -75,6 +82,8 @@ export default {
                  imageUrl:'',
                  imgLoading:false,
                  formData : '',
+                 loadSkelton:true,
+                 errorMessage:''
         }
     },
     watch:{
@@ -93,6 +102,9 @@ export default {
      
     },
     methods:{
+      hideSkelton(payload){
+       this.loadSkelton=payload
+      },
         submit(){
           this.formData.append('update', 'data')
                 this.formData.append('last_name',this.user.last_name)
@@ -102,12 +114,17 @@ export default {
                 this.formData.append('email',this.user.email)
                 this.formData.append('bio',this.user.bio)
                 this.formData.append('adres',this.user.adres)
-                console.log(this.formData)
-                this.$api._post('/users/',this.formData,{cc:{ref:this.$refs.form,fullResponse:'d'}}).then((res)=>{
+               
+                this.$api._post('/users/',this.formData,{cc:{ref:this.$refs.form,fullResponse:'fullResponse'}}).then((res)=>{
                 if(res!==undefined){
-                  this.user=[]
+                  if(res.status==200 && res.data.username ){
+                    this.errorMessage=res.data.username
+                  }
+                  else{
+                    this.user=[]
                    this.$refs.form.reset()
-                   this.$router.push({path:'/'})
+                 this.$router.push({path:'/'})
+                  }
                   
                 }
                 })

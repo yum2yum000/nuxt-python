@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -9,11 +9,13 @@ import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
+import { createStore } from './store.js'
 
 /* Plugins */
 
 import nuxt_plugin_plugin_5a3d16aa from 'nuxt_plugin_plugin_5a3d16aa' // Source: .\\components\\plugin.js (mode: 'all')
 import nuxt_plugin_templatesplugin32c510f0_5a249c24 from 'nuxt_plugin_templatesplugin32c510f0_5a249c24' // Source: .\\templates.plugin.32c510f0.js (mode: 'all')
+import nuxt_plugin_cookieuniversalnuxt_197394f6 from 'nuxt_plugin_cookieuniversalnuxt_197394f6' // Source: .\\cookie-universal-nuxt.js (mode: 'all')
 import nuxt_plugin_nuxtvuemultiselect_d3e45534 from 'nuxt_plugin_nuxtvuemultiselect_d3e45534' // Source: .\\nuxt-vue-multiselect.js (mode: 'all')
 import nuxt_plugin_nuxtleaflet_3fa5cbb7 from 'nuxt_plugin_nuxtleaflet_3fa5cbb7' // Source: .\\nuxt-leaflet.js (mode: 'client')
 import nuxt_plugin_axios_f50b5d64 from 'nuxt_plugin_axios_f50b5d64' // Source: .\\axios.js (mode: 'all')
@@ -22,6 +24,8 @@ import nuxt_plugin_pluginmain_3ebe5b24 from 'nuxt_plugin_pluginmain_3ebe5b24' //
 import nuxt_plugin_veeValidate_1cb8e4d4 from 'nuxt_plugin_veeValidate_1cb8e4d4' // Source: ..\\plugins\\veeValidate (mode: 'all')
 import nuxt_plugin_i18n_6a80ea94 from 'nuxt_plugin_i18n_6a80ea94' // Source: ..\\plugins\\i18n (mode: 'all')
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'all')
+import nuxt_plugin_skeleton_6bf43dc3 from 'nuxt_plugin_skeleton_6bf43dc3' // Source: ..\\plugins\\skeleton (mode: 'all')
+import nuxt_plugin_checkRoutes_261a7d88 from 'nuxt_plugin_checkRoutes_261a7d88' // Source: ..\\plugins\\checkRoutes (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -59,8 +63,22 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
+const originalRegisterModule = Vuex.Store.prototype.registerModule
+const baseStoreOptions = { preserveState: process.client }
+
+function registerModule (path, rawModule, options = {}) {
+  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+}
+
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext)
+
+  const store = createStore(ssrContext)
+  // Add this.$router into store actions/mutations
+  store.$router = router
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  store.registerModule = registerModule
 
   // Create Root instance
 
@@ -69,6 +87,7 @@ async function createApp(ssrContext, config = {}) {
   const app = {
     head: {"title":"frontend","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Funpkg.com\u002Fleaflet@1.2.0\u002Fdist\u002Fleaflet.css"}],"style":[],"script":[]},
 
+    store,
     router,
     nuxt: {
       defaultTransition,
@@ -113,6 +132,9 @@ async function createApp(ssrContext, config = {}) {
     ...App
   }
 
+  // Make app available into store via this.app
+  store.app = app
+
   const next = ssrContext ? ssrContext.next : location => app.router.push(location)
   // Resolve route
   let route
@@ -125,6 +147,7 @@ async function createApp(ssrContext, config = {}) {
 
   // Set context to app.context
   await setContext(app, {
+    store,
     route,
     next,
     error: app.nuxt.error.bind(app),
@@ -151,6 +174,9 @@ async function createApp(ssrContext, config = {}) {
       app.context[key] = value
     }
 
+    // Add into store
+    store[key] = app[key]
+
     // Check if plugin not already installed
     const installKey = '__nuxt_' + key + '_installed__'
     if (Vue[installKey]) {
@@ -172,6 +198,13 @@ async function createApp(ssrContext, config = {}) {
   // Inject runtime config as $config
   inject('config', config)
 
+  if (process.client) {
+    // Replace store state before plugins execution
+    if (window.__NUXT__ && window.__NUXT__.state) {
+      store.replaceState(window.__NUXT__.state)
+    }
+  }
+
   // Add enablePreview(previewData = {}) in context for plugins
   if (process.static && process.client) {
     app.context.enablePreview = function (previewData = {}) {
@@ -187,6 +220,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_templatesplugin32c510f0_5a249c24 === 'function') {
     await nuxt_plugin_templatesplugin32c510f0_5a249c24(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_cookieuniversalnuxt_197394f6 === 'function') {
+    await nuxt_plugin_cookieuniversalnuxt_197394f6(app.context, inject)
   }
 
   if (typeof nuxt_plugin_nuxtvuemultiselect_d3e45534 === 'function') {
@@ -221,6 +258,14 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_axios_3566aa80(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_skeleton_6bf43dc3 === 'function') {
+    await nuxt_plugin_skeleton_6bf43dc3(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_checkRoutes_261a7d88 === 'function') {
+    await nuxt_plugin_checkRoutes_261a7d88(app.context, inject)
+  }
+
   // Lock enablePreview in context
   if (process.static && process.client) {
     app.context.enablePreview = function () {
@@ -250,6 +295,7 @@ async function createApp(ssrContext, config = {}) {
   }
 
   return {
+    store,
     app,
     router
   }

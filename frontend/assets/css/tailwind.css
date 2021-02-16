@@ -34,3 +34,6 @@ src: url('../yekan-font/yekannumbers-regular.eot?#') format('eot'),  /* IE6–8 
 .d-ltr{
     direction: ltr!important;
 }
+.loader{
+    width:100%!important;
+}

@@ -27,10 +27,14 @@ export const handleErrors=(e,cc,{error})=>{
         }
 
 
-    } else if(e?.response?.status===400){
+    } 
+    else if(e?.response?.status===500){
         const data=e.response.data
-        console.log('data',data)
         error({statusCode:500,message:data})
+        
+    }
+    else if(cc?.onError){
+        cc.onError(e?.response)
     }
 
 

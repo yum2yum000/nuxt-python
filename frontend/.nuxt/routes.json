@@ -7,6 +7,13 @@
     "_name": "_12a89f27"
   },
   {
+    "name": "profile___fa",
+    "path": "/profile",
+    "component": "F:\\\\blog\\\\frontend\\\\pages\\\\profile\\\\index.vue",
+    "chunkName": "pages/profile/index",
+    "_name": "_6fe9a747"
+  },
+  {
     "name": "Register___fa",
     "path": "/Register",
     "component": "F:\\\\blog\\\\frontend\\\\pages\\\\Register\\\\index.vue",
