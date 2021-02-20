@@ -28,6 +28,7 @@
 import {mapState} from 'vuex'
 export default {
     name:'Login',
+    layout:'auth',
     components: {
     },
     data(){

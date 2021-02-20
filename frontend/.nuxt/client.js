@@ -218,7 +218,7 @@ function resolveComponents (router) {
 }
 
 function callMiddleware (Components, context, layout) {
-  let midd = ["load-auth","nuxti18n"]
+  let midd = ["load-auth","load-user-data","nuxti18n"]
   let unknownMiddleware = false
 
   // If layout is undefined, only call global middleware

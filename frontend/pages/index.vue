@@ -1,8 +1,7 @@
 <template>
   <div>
    
-    <nav-bar @openSidebar="show=!show"></nav-bar>
-    <side-bar :show="show"></side-bar>
+    FFF
   </div>
 </template>
 
@@ -11,7 +10,7 @@ export default {
   name:'home',
   data(){
     return{
-      show:false
+      
     }
   }
  

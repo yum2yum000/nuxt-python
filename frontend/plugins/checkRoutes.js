@@ -6,8 +6,6 @@ export default function(context,inject){
     console.log('item',item)
        if(item.regex){
         const re=new RegExp(item.regex.join('|'),'g')
-        console.log('re1',re)
-        console.log('re2',context.route.path)
         return re.test(context.route.path)
        }
        else{

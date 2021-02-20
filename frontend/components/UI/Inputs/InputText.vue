@@ -4,7 +4,7 @@
       <label  class="block mb-2 text-sm font-medium text-gray-600">{{label}}</label>
         <input v-if="controlType === 'input'" :class="$attrs.align" class="hover:outline-none focus:outline-none p-3 w-full h-12 bg-gray-200" :type="inputType" v-bind="$attrs" v-on="{...$listeners,input}" :value="value">
        <textarea v-if="controlType === 'textarea'" :class="$attrs.align" class="hover:outline-none focus:outline-none p-3 w-full h-12 bg-gray-200" :type="inputType" v-bind="$attrs" v-on="{...$listeners,input}" :value="value"></textarea>
-        <div v-if="errors && errors.length>0">{{errors[0]}}</div>
+        <div v-if="errors && errors.length>0" class="text-red-500">{{errors[0]}}</div>
     </validation-provider> 
 </template>
 

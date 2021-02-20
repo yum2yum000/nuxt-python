@@ -74,7 +74,8 @@ export default {
     computed: {
       fas () {
          return fas
-      },}
+      },
+      }
 }
 </script>
 

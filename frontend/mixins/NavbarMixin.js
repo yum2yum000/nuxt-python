@@ -31,8 +31,8 @@ export default{
           
             {
                id:3,
-              menuTitle:'ثبت نام',
-              route:'register',
+              menuTitle:'درباره ما',
+              route:'/about',
               subMenu:[
               ]
             }

@@ -46,9 +46,43 @@
              
                 
             </nav>
-            <div class="flex flex-row items-center justify-between p-4">
+            <div class="flex flex-row-reverse items-center justify-between ">
                
-                <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Flowtrail UI</a>
+                <div class="flex justify-center ">
+  <!-- Dropdown -->
+ <template v-if="!showName">
+  
+     <nuxt-link to="/login" class="flex"> <img  class="flex h-full w-7 object-cover" src="@/assets/images/login.png" alt="avatar"> 
+    <span class="mr-1">ورود</span></nuxt-link>
+    
+       <nuxt-link to="/register" class="flex mr-5">
+         <img  class="h-full w-7 object-cover" src="@/assets/images/register.png" alt="avatar"> 
+      <span class="mr-1"> ثبت نام</span>
+       </nuxt-link>
+ </template >
+  <div v-else class="relative dropdown ">
+    <span v-if="showName" class="absolute position-user">{{showName}}</span>
+    <button class="block w-35 h-35 ml-1 rounded-full overflow-hidden focus:outline-none" >
+      <img  v-if="showImg" class="h-full w-full object-cover" :src="getUrl+showImg" alt="avatar">
+      <img  v-else class="h-full w-full object-cover" src="@/assets/images/default.jpg" alt="avatar">
+      
+    </button>
+    
+    <!-- Dropdown Body -->
+    <div class="absolute right-0 w-24 margin-2  bg-white border rounded shadow-xl dropdown-menu">   
+      
+      <nuxt-link to="/profile" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white">پروفایل</nuxt-link>
+      
+        <hr>
+  
+    <button @click="logout" class="transition-colors w-full duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white focus:outline-none">    
+      خروج
+    </button>
+  </div>
+  <!-- // Dropdown Body -->
+  </div>
+  <!-- // Dropdown -->
+</div>
                 <side-toggle @sideShow="openSidebar"></side-toggle>
             </div>
 
@@ -62,6 +96,8 @@
 
 <script>
 import NavbarMixin from '@/mixins/NavbarMixin'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import {mapGetters} from 'vuex'
 export default {
   data(){
     return{
@@ -71,14 +107,33 @@ export default {
     }
   },
   mixins:[NavbarMixin],
+   computed:{
+        ...mapGetters("profile",['getDisplayName']),
+        fas () {
+         return fas
+      },
+      showName(){
+        return this.getDisplayName?.username?.substr(0, 4);
+      },
+      showImg(){
+         return this.getDisplayName.avatar
+      },
+      getUrl(){
+        return this.$baseUrl
+      }
+    },
   methods:{
+    logout(){
+    this.$store.dispatch('auth/logout')
+    },
     setActive(menu){
     this.dropShow=menu.menuTitle
     this.menuHasImg=menu.subMenu.findIndex(item => item.img != undefined);
     },
     openSidebar(){
       this.$emit('openSidebar')
-    }
+    },
+    
   }
     
 }
@@ -95,5 +150,29 @@ export default {
 .w-50{
   width: 50%;
 }
-
+.dropdown-menu {
+  display: none;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.margin-2{
+  margin-top: 1px;
+}
+.position-user{
+    left:-30px;
+    top: 25%; 
+}
+@media(max-width:800px){
+  .position-user{
+    left:40px!important;
+    top: 25%; 
+}
+}
+.w-35{
+  width:35px;
+}
+.h-35{
+  height:35px;
+}
 </style>

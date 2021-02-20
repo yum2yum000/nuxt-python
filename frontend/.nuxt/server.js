@@ -148,7 +148,7 @@ export default async (ssrContext) => {
   /*
   ** Call global middleware (nuxt.config.js)
   */
-  let midd = ["load-auth","nuxti18n"]
+  let midd = ["load-auth","load-user-data","nuxti18n"]
   midd = midd.map((name) => {
     if (typeof name === 'function') {
       return name

@@ -58,6 +58,7 @@ extend('includeLetter', value => {
 
 export default {
     name:'Register',
+    layout:'auth',
     components: {
     location: function() {
       if(process.client)

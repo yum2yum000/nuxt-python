@@ -26,7 +26,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-   '~/plugins/veeValidate','~/plugins/i18n','~/plugins/axios','~/plugins/skeleton','~/plugins/checkRoutes'
+   '~/plugins/veeValidate','~/plugins/i18n','~/plugins/axios','~/plugins/skeleton','~/plugins/checkRoutes','~/plugins/globalUrl'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -85,7 +85,7 @@ export default {
     }
   },
   router:{
-    middleware:['load-auth'],
+    middleware:['load-auth','load-user-data'],
     parsQuery(query){
       return require('qs').parse(query)
     },

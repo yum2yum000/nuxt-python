@@ -15,9 +15,10 @@ import '..\\node_modules\\leaflet\\dist\\leaflet.css'
 
 import '..\\node_modules\\vue-multiselect\\dist\\vue-multiselect.min.css'
 
+import _2d217e9e from '..\\layouts\\auth.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_auth": sanitizeComponent(_2d217e9e),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
