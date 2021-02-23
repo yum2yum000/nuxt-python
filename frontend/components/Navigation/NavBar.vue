@@ -1,6 +1,6 @@
 <template>
-  <client-only>
-    <div class="w-full text-gray-700  dark-mode:text-gray-200 dark-mode:bg-gray-800 bg-brand-blue">
+
+    <div class="w-full text-gray-700  dark-mode:text-gray-200 dark-mode:bg-gray-800 bg-brand-blue h-14">
         <div  class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
           
             <nav  class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-start md:flex-row">
@@ -15,7 +15,7 @@
                       <nuxt-link :to="localePath(menu.route)">{{menu.menuTitle}}</nuxt-link>
                          <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': dropShow==menu.menuTitle && open, 'rotate-0': !dropShow==menu.menuTitle && open}" class="inline w-4 h-4 ml-1 transition-transform duration-200 transform "><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>     
                     </button>
-                        <div  :class="[(dropShow==menu.menuTitle && open)?'block':'hidden',menuHasImg==-1?'w-9':'w-600 flex flex-wrap']"  class=" w-400 p-2 mt-36 bg-white  absolute right-0 w-full  origin-top-right rounded-md shadow-lg md:w-48 z-30">
+                        <div  :class="[(dropShow==menu.menuTitle && open)?'block':'hidden',menuHasImg==-1?'w-9':'w-600 flex flex-wrap']"  class="w-400 p-2 mt-36 bg-white  absolute right-0 w-full  origin-top-right rounded-md shadow-lg md:w-48 z-30">
                             <template v-for="(subMenu,index) in menu.subMenu" >
                             <a  v-if="subMenu.img==undefined" :key="index" class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
                                {{subMenu.name}} 
@@ -69,7 +69,7 @@
     </button>
     
     <!-- Dropdown Body -->
-    <div class="absolute right-0 w-24 margin-2  bg-white border rounded shadow-xl dropdown-menu">   
+    <div class="absolute lg:right-0 left-0 w-24 margin-2  bg-white border rounded shadow-xl dropdown-menu z-30 ">   
       
       <nuxt-link to="/profile" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white">پروفایل</nuxt-link>
       
@@ -90,7 +90,6 @@
         </div>
     </div>
 
-  </client-only>
   
 </template>
 
@@ -113,7 +112,7 @@ export default {
          return fas
       },
       showName(){
-        return this.getDisplayName?.username?.substr(0, 4);
+        return this.getDisplayName?.username?.substr(0, 5);
       },
       showImg(){
          return this.getDisplayName.avatar

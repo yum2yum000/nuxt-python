@@ -11,6 +11,12 @@
   "LazyLoading": {
     "description": "Auto imported from F:/blog/frontend/components/Common/Loading.vue"
   },
+  "UserLocation": {
+    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
+  },
+  "LazyUserLocation": {
+    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
+  },
   "NavBar": {
     "description": "Auto imported from F:/blog/frontend/components/Navigation/NavBar.vue"
   },
@@ -29,17 +35,17 @@
   "LazySideToggle": {
     "description": "Auto imported from F:/blog/frontend/components/Navigation/SideToggle.vue"
   },
-  "UserLocation": {
-    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
-  },
-  "LazyUserLocation": {
-    "description": "Auto imported from F:/blog/frontend/components/Location/UserLocation.vue"
-  },
   "Observer": {
     "description": "Auto imported from F:/blog/frontend/components/UI/Observer.vue"
   },
   "LazyObserver": {
     "description": "Auto imported from F:/blog/frontend/components/UI/Observer.vue"
+  },
+  "AppForm": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
+  },
+  "LazyAppForm": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
   },
   "InputFile": {
     "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/InputFile.vue"
@@ -59,11 +65,11 @@
   "LazyLanguageInput": {
     "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/LanguageInput.vue"
   },
-  "AppForm": {
-    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
+  "TextSlider": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Slider/TextSlider.vue"
   },
-  "LazyAppForm": {
-    "description": "Auto imported from F:/blog/frontend/components/UI/Forms/AppForm.vue"
+  "LazyTextSlider": {
+    "description": "Auto imported from F:/blog/frontend/components/UI/Slider/TextSlider.vue"
   },
   "InputPhone": {
     "description": "Auto imported from F:/blog/frontend/components/UI/Inputs/Masks/InputPhone.vue"

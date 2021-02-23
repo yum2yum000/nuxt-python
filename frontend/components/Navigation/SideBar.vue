@@ -1,6 +1,6 @@
 <template>
-   <div v-if="isMobileDevice" class="flex-col w-full md:flex md:flex-row md:min-h-screen"  >
-        <div v-if="show" class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-white md:w-64 dark-mode:text-gray-200 dark-mode:bg-gray-800">
+   <div v-if="show" class="flex-col w-full md:flex md:flex-row md:min-h-screen"  >
+        <div  class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-white md:w-64 dark-mode:text-gray-200 dark-mode:bg-gray-800">
          
                 <nav  class="bg-gray-300 ease-out motion-safe:animate-spin text-right flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
                 <template v-for="(menu) in  menus" >

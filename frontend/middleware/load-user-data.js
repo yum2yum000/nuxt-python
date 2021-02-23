@@ -3,7 +3,6 @@ export default async function({store}){
     const isAuthenticated=store.getters['auth/isAuthenticated']
     console.log('isAuthenticated',isAuthenticated)
     if(isAuthenticated){
-        console.log('888')
         requestList.push(store.dispatch('profile/fetchIdentity'))
     }
     if(process.server){

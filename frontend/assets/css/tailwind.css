@@ -37,3 +37,10 @@ src: url('../yekan-font/yekannumbers-regular.eot?#') format('eot'),  /* IE6–8 
 .loader{
     width:100%!important;
 }
+.transform{
+    transform: rotateY( 
+180deg
+);
+
+
+}
